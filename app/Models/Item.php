@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Item extends Model
 {
@@ -19,11 +20,17 @@ class Item extends Model
     protected $casts = [
         'photos' => 'array'
     ];
+    
+    public function getThumbnailAttribute() //menambahkan field thumbnail
+    {
+        if($this->photos){
+            return Storage::url(json_decode($this->photos)[0]);
+            // return json_decode($this->photos)[0];
+            // return Storage::url(json_decode($this->photos[0]));
+        }
 
-    // public function brand(): BelongsTo
-    // {
-    //     return $this->belongsTo(Brand::class, 'brand_id', 'id');
-    // }
+        return 'https://via.placeholder.com/800X600';
+    }
 
     public function brand(): BelongsTo
     {
