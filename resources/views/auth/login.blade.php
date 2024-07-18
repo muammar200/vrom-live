@@ -1,48 +1,80 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
-        <x-validation-errors class="mb-4" />
+<x-front-layout>
 
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+            <div class="mb-4 text-sm font-medium text-green-600 dark:text-green-400">
                 {{ session('status') }}
             </div>
         @endif
+        
+        <!-- Main Content -->
+        <section class="bg-darkGrey relative py-[70px]">
+            <div class="container">
+                <div class="flex flex-col items-center">
+                    <header class="mb-[30px] text-center">
+                        <h2 class="font-bold text-dark text-[26px] mb-1">
+                            Sign In & Drive
+                        </h2>
+                        <p class="text-base text-secondary">We will help you get ready today</p>
+                    </header>
+         
+                    <!-- Form Card -->
+                    <form action="{{ route('login') }}" class="bg-white p-[30px] pb-10 rounded-3xl max-w-[490px] w-full" method="POST" id="signInForm">
+                        @csrf
+                        <x-validation-errors class="mb-4" />
+                        <div class="grid grid-cols-2 items-center gap-y-6 gap-x-4 lg:gap-x-[30px]">
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+                            
+                            <!-- Email -->
+                            <div class="flex flex-col col-span-2 gap-3">
+                                <label for="email" class="text-base font-semibold text-dark">
+                                    Email Address
+                                </label>
+                                <input type="email" name="email" id="email"
+                                    class="text-base font-medium focus:border-primary focus:outline-none placeholder:text-secondary placeholder:font-normal px-[26px] py-4 border border-grey rounded-[50px]"
+                                    placeholder="Insert Email Address">
+                            </div>
+                            <!-- Password -->
+                            <div class="flex flex-col col-span-2 gap-3">
+                                <label for="" class="text-base font-semibold text-dark">
+                                    Password
+                                </label>
+                                <input type="password" name="password" id="password"
+                                    class="text-base font-medium focus:border-primary focus:outline-none placeholder:text-secondary placeholder:font-normal px-[26px] py-4 border border-grey rounded-[50px]"
+                                    placeholder="Insert password">
+                                <a href="#"
+                                    class="mt-1 text-base text-right underline text-secondary underline-offset-2">
+                                    Forgot My Password
+                                </a>
+                            </div>
+                            <!-- Sign In Button -->
+                            <div class="col-span-2 mt-[26px]">
+                                <!-- Button Primary -->
+                                <div class="p-1 rounded-full bg-primary group">
+                                    <a href="#!" class="btn-primary" id="signInButton">
+                                        <p>
+                                            Sign In
+                                        </p>
+                                        <img src="/svgs/ic-arrow-right.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>
 
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                            <div class="col-span-2">
+                                <a href="{{ route('register') }}" class="btn-secondary">
+                                    <p>Create New Account</p>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </section>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+        <script>
+            // on signup click, submit the form
+      $('#signInButton').click(function () {
+          $('#signInForm').submit();
+      });
+        </script>
+        
+</x-front-layout>

@@ -33,7 +33,8 @@ class BookingRequest extends FormRequest
             'zip' => ['nullable', 'string', 'max:255'], 
             'status' => ['required', 'string', 'in:pending,confirmed,done,cancelled'],
             // 'payment_method' => ['required', 'string', 'in:midtrans,other'], 
-            'payment_status' => ['required', 'string', 'in:pending,success,failed,expired'],
+            // 'payment_status' => ['required', 'string', 'in:pending,success,failed,expired'],
+            'payment_status' => ['required', 'string', 'in:pending,success,cancelled'],
             // 'payment_url' => ['nullable', 'string', 'url'], 
             // 'total_price' => ['required', 'numeric', 'min:0.01'],
         ];

@@ -24,7 +24,10 @@ return new class extends Migration
             $table->text('features')->nullable();
 
             $table->decimal('price', $precision = 20, $scale = 2)->default(0);
-            $table->decimal('star', $precision = 1, $scale = 1)->default(0);
+            
+            // sudah diubah di db langsung
+            $table->decimal('star', $precision = 2, $scale = 1)->default(0);
+            
             $table->integer('review')->default(0);
             
             $table->timestamps();

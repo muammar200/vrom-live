@@ -25,8 +25,7 @@ class Item extends Model
     {
         if($this->photos){
             return Storage::url(json_decode($this->photos)[0]);
-            // return json_decode($this->photos)[0];
-            // return Storage::url(json_decode($this->photos[0]));
+            
         }
 
         return 'https://via.placeholder.com/800X600';
