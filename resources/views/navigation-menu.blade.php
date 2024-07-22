@@ -6,11 +6,20 @@
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
                     <a href="{{ route('admin.dashboard') }}">
-                        <x-application-mark class="block w-auto h-9" />
+                        {{-- <x-application-mark class="block w-auto h-9" /> --}}
                     </a>
                 </div>
+                @if (auth()->user()->roles == 'USER')
+                    <div class="flex items-center shrink-0">
+                    <a href="{{ route('front.index') }}">
+                        {{-- <h1>GoCarRental</h1> --}}
+                        <h1 class="text-4xl font-bold text-white">GoCarRental</h1>
+                    </a>
+                </div>
+                @endif
 
                 <!-- Navigation Links -->
+                @if (auth()->user()->roles == 'ADMIN')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
@@ -36,6 +45,7 @@
                         {{ __('Booking') }}
                     </x-nav-link>
                 </div>
+                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -114,13 +124,13 @@
 
                         <x-slot name="content">
                             <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{-- <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
-                            </div>
+                            </div> --}}
 
-                            <x-dropdown-link href="{{ route('profile.show') }}">
+                            {{-- <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
-                            </x-dropdown-link>
+                            </x-dropdown-link> --}}
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\TypeController as AdminTypeController;
 use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\UserDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 Route::name('front.')->group(function (){
     Route::get('/', [LandingController::class, 'index'])->name('index');
     Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog');
+    Route::get('/maps', [LandingController::class, 'maps'])->name('maps');
     Route::get('/detail/{slug}', [DetailController::class, 'index'])->name('detail');
     
     Route::middleware(['auth'])->group(function () { 
@@ -38,7 +40,18 @@ Route::name('front.')->group(function (){
         Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
         Route::get('/payment/{bookingId}', [PaymentController::class, 'index'])->name('payment');
         Route::post('/payment/{bookingId}', [PaymentController::class, 'update'])->name('payment.update');
+        Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+        Route::get('/payment/error', [PaymentController::class, 'error'])->name('payment.error');
+        Route::get('/payment/unfinish', [PaymentController::class, 'unfinish'])->name('payment.unfinish');
+        Route::post('/payment/notification', [PaymentController::class, 'notification'])->name('payment.notification');
     });
+});
+
+Route::prefix('user')->name('user.')->middleware([
+    'auth:sanctum',
+])->group(function () {
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/transaction', [UserDashboardController::class, 'index'])->name('transaction');
 });
 
 Route::prefix('admin')->name('admin.')->middleware([
@@ -58,4 +71,3 @@ Route::prefix('admin')->name('admin.')->middleware([
 Route::prefix('auth-custom')->name('auth-custom.')->group( function(){
     Route::post('/register', [CustomRegisterController::class, 'create'])->name('register');
 });
-

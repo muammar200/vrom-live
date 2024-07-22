@@ -8,12 +8,10 @@
                             <h2 class="font-bold text-dark text-[26px] mb-1">
                                 Success Booking
                             </h2>
-                            <p class="text-base text-secondary">We will email you the confirmation <br>
-                                and the next instructions</p>
                         </header>
                         <!-- Button Primary -->
                         <div class="p-1 rounded-full bg-primary group w-[220px]">
-                            <a href="index.html" class="btn-primary">
+                            <a href="{{ route('user.dashboard') }}" class="btn-primary">
                                 <p>
                                     My Dashboard
                                 </p>
@@ -21,7 +19,7 @@
                             </a>
                         </div>
                     </div>
-                    <img src="/images/porsche_small.webp" class="max-w-[50%] hidden lg:block -mr-[100px]"
+                    <img src="{{ $booking->item->thumbnail }}" class="max-w-[50%] hidden lg:block -mr-[100px]"
                         alt="">
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <x-front-layout>
     <!-- Popular Cars -->
-    <section class="bg-darkGrey">
+    {{-- <section class="bg-darkGrey">
         <div class="container relative py-[100px]">
             <header class="mb-[30px]">
                 <h2 class="font-bold text-dark text-[26px] mb-1">
@@ -46,16 +46,16 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- Other Cars --}}
     <section class="bg-darkGrey">
         <div class="container relative py-[100px]">
-            <header class="mb-[30px]">
+            {{-- <header class="mb-[30px]">
                 <h2 class="font-bold text-dark text-[26px] mb-1">
-                    Other Cars
+                    
                 </h2>
-            </header>
+            </header> --}}
 
             <!-- Cars -->
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-[29px]">

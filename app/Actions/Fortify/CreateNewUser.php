@@ -31,7 +31,7 @@ class CreateNewUser implements CreatesNewUsers
         // Handle photo upload (if uploaded)
         $photoPath = null;
         if (isset($input['photo']) && $input['photo']->isValid()) {
-            $photoPath = $input['photo']->store('user-photos', 'private'); // Stores in 'user-photos' directory under 'public' storage
+            $photoPath = $input['photo']->store('user-photos', 'public'); // Stores in 'user-photos' directory under 'public' storage
         }
 
         return User::create([

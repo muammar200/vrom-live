@@ -54,7 +54,8 @@
                                         Price
                                     </p>
                                     <p class="text-base font-semibold">
-                                        ${{ number_format($booking->item->price) }} per day
+                                        Rp. {{ number_format($booking->item->price, 0, ',', '.') }} per day
+
                                     </p>
                                 </div>
                                 <!-- Items -->
@@ -63,7 +64,8 @@
                                         VAT (10%)
                                     </p>
                                     <p class="text-base font-semibold">
-                                        ${{ number_format($booking->item->price * $booking->start_date->diffInDays($booking->end_date) * 0.10) }}
+                                        {{-- Rp. {{ number_format($booking->item->price * $booking->start_date->diffInDays($booking->end_date) * 0.10) }} --}}
+                                        Rp. {{ number_format($booking->item->price * $booking->start_date->diffInDays($booking->end_date) * 0.10, 0, ',', '.') }}
                                     </p>
                                 </div>
                                 <!-- Items -->
@@ -72,7 +74,7 @@
                                         Grand total
                                     </p>
                                     <p class="text-base font-semibold">
-                                        ${{ number_format($booking->total_price) }}
+                                        Rp. {{ number_format($booking->total_price, 0, ',', '.') }}
                                     </p>
                                 </div>
                             </div>
@@ -126,7 +128,7 @@
                             
                         </div>
                     </form>
-                    <img src="/images/porsche_small.webp" class="max-w-[50%] hidden lg:block -mr-[100px]"
+                    <img src="{{ $booking->item->thumbnail }}" class="max-w-[50%] hidden lg:block -mr-[100px]"
                         alt="">
                 </div>
             </div>

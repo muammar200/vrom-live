@@ -33,7 +33,7 @@
                 <div class="flex items-center justify-between">
                     <!-- LOGO -->
                     <a href="{{ route('front.index') }}">
-                        <h1 class="text-4xl font-bold">IDNMobil</h1>
+                        <h1 class="text-4xl font-bold">GoCarRental</h1>
                     </a>
                     <!-- RESPONSIVE NAVBAR BUTTON TOGGLER -->
                     <div class="block lg:hidden">
@@ -54,14 +54,15 @@
                         <div
                             class="flex flex-col w-full ml-auto lg:w-auto gap-4 lg:gap-[50px] lg:items-center lg:flex-row">
                             <a href="{{ route('front.index') }}"
-                                class="nav-link-item {{ request()->routeIs('front.index') ? 'active' : '' }}">Landing</a>
+                                class="nav-link-item {{ request()->routeIs('front.index') ? 'active' : '' }}">Home</a>
                             <a href="{{ route('front.catalog') }}"
                                 class="nav-link-item {{ request()->routeIs('front.catalog') ? 'active' : '' }}">Catalog</a>
-                            <a href="#!" class="nav-link-item">Benefits</a>
-                            <a href="#!" class="nav-link-item">Stories</a>
-                            <a href="#!" class="nav-link-item">Maps</a>
+                            {{-- <a href="#!" class="nav-link-item">Benefits</a> --}}
+                            <a href="{{ route('front.maps') }}"
+                                class="nav-link-item {{ request()->routeIs('front.maps') ? 'active' : '' }}">Maps</a>
+                            {{-- <a href="#!" class="nav-link-item">Stories</a> --}}
                         </div>
-                        @if (request()->routeIs('front.index') || request()->routeIs('front.catalog') || request()->routeIs('front.detail') || request()->routeIs('front.checkout'))
+                        @if (request()->routeIs('front.index') || request()->routeIs('front.catalog') || request()->routeIs('front.maps') || request()->routeIs('front.detail') || request()->routeIs('front.checkout'))
                             @auth
                                 <div
                                     class="relative flex flex-col w-full ml-auto lg:w-auto lg:gap-12 lg:items-center lg:flex-row">
@@ -90,11 +91,11 @@
                                         id="userDropdownMenu">
                                         <div class="border border-secondary rounded-[22px] bg-white p-[26px]">
                                             <div class="flex flex-col gap-4">
-                                                <a href="#!"
+                                                <a href="{{ url('/user/dashboard') }}"
                                                     class="text-base font-medium transition-all text-dark hover:underline underline-offset-2 decoration-1">
                                                     My Transactions
                                                 </a>
-                                                <a href="#!"
+                                                {{-- <a href="#!"
                                                     class="text-base font-medium transition-all text-dark hover:underline underline-offset-2 decoration-1">
                                                     Rewards
                                                 </a>
@@ -105,7 +106,7 @@
                                                 <a href="#!"
                                                     class="text-base font-medium transition-all text-dark hover:underline underline-offset-2 decoration-1">
                                                     Payments
-                                                </a>
+                                                </a> --}}
                                                 <div class="hidden">
                                                     <form method="POST" action="{{ route('logout') }}" id="logoutForm">
                                                         @csrf

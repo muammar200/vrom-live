@@ -8,6 +8,21 @@
   
     <x-slot name="script">
       <script>
+        // Format untuk tanggal
+        function formatDate(dateString) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        // Format untuk mata uang
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(amount);
+        }
+
         // AJAX DataTable
         var datatable = $('#dataTable').DataTable({
           processing: true,
@@ -22,7 +37,10 @@
           columns: [
             {
               data: 'id',
-              name: 'id'
+              name: 'id',
+              render: function(data, type, row, meta) {
+                return meta.row + 1; // Mengubah ID menjadi nomor urut
+              }
             },
             {
               data: 'user.name',
@@ -38,11 +56,17 @@
             },
             {
               data: 'start_date',
-              name: 'start_date'
+              name: 'start_date',
+              render: function(data, type, row) {
+                return formatDate(data);
+              }
             },
             {
               data: 'end_date',
-              name: 'end_date'
+              name: 'end_date',
+              render: function(data, type, row) {
+                return formatDate(data);
+              }
             },
             {
               data: 'status',
@@ -54,7 +78,10 @@
             },
             {
               data: 'total_price',
-              name: 'total_price'
+              name: 'total_price',
+              render: function(data, type, row) {
+                return formatCurrency(data);
+              }
             },
             {
               data: 'action',
@@ -81,7 +108,7 @@
             <table id="dataTable">
               <thead>
                 <tr>
-                  <th style="max-width: 1%">ID</th>
+                  <th style="max-width: 1%">No</th>
                   <th>User</th>
                   <th>Brand</th>
                   <th>Item</th>
